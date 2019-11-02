@@ -1,4 +1,4 @@
-import AppleLogin from './'
+import AppleLogin from '..'
 
 describe('AppleLogin', () => {
   it('is truthy', () => {

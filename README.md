@@ -26,6 +26,24 @@ class Example extends React.Component {
 }
 ```
 
+## Login Props
+
+|    params    |   value  |             default value            |   description    |
+|:------------:|:--------:|:------------------------------------:|:----------------:|
+|    clientId  |  string  |               REQUIRED               | You can create a clientID by creating a [new project on Google developers website.](https://developers.google.com/identity/sign-in/web/sign-in) |
+|    scope     |  string  |                   name email                  |                  |
+| redirectURI |  string  |                   REQUIRED                  | URL of the Javascript file normally hosted by Google |
+|     state    |  string  |             -            |                  |
+|     dataColor    |  string  |             black            |                  |
+|     dataBorder    |  boolean/string  |             false            |                  |
+|     dataType    |  string(sign in/continue)  |             sign in            |                  |
+
+## Production Bundle
+```
+npm run prepare
+```
+
+
 ## License
 
 MIT © [Mayank Patel](https://github.com/patelmayankce)

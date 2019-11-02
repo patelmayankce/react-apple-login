@@ -1,43 +1,46 @@
-import React, { useEffect }  from 'react';
+import React, { useEffect } from 'react';
 
-// import useScript from './useScript';
+import useScript from './useScript';
 
 export interface AppleLoginProps {
   clientId: string;
-  scope: string;
+  scope?: string;
   redirectURI: string;
   state?: string;
+  dataColor?: string | 'white' | 'black';
+  dataBorder?: boolean | string | 'true' | 'false';
+  dataType?: string | 'sign in' | 'continue';
 }
 
-// declare const window: any | Window;
+declare const window: any | Window;
 
-const AppleLogin = (/**props: AppleLoginProps */) => {
-  // const { clientId, redirectURI, scope, state = '' } = props;
-  // const [loaded] = useScript(
-  //   'https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js',
-  // );
+const AppleLogin = (props: AppleLoginProps) => {
+  const { clientId, redirectURI, scope = 'name email', state = '', dataBorder = true, dataColor = 'white', dataType = 'sign in' } = props;
+  const [loaded] = useScript(
+    'https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js',
+  );
 
   useEffect(() => {
-  //   if (loaded) {
-  //     try {
-  //       if (window && window.AppleID && window.AppleID.auth) {
-  //         window.AppleID.auth.init({
-  //           clientId,
-  //           scope,
-  //           redirectURI,
-  //           state,
-  //         });
-  //       }
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   }
+    if (loaded) {
+      try {
+        if (window && window.AppleID && window.AppleID.auth) {
+          window.AppleID.auth.init({
+            clientId,
+            scope,
+            redirectURI,
+            state,
+          });
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
     return () => { };
-  }, [/**loaded*/]);
+  }, [loaded]);
 
   return (
     <>
-      <div id="appleid-signin" data-color="white" data-border="true" data-type="sign in" />
+      <div id="appleid-signin" data-color={dataColor} data-border={dataBorder.toString()} data-type={dataType} />
     </>
   );
 };
