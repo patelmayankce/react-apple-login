@@ -2,7 +2,7 @@
   "name": "react-apple-login",
   "version": "1.0.0",
   "description": "A Apple Log-in Component for React",
-  "author": "patelmayankce",
+  "author": "Mayank Patel <patelmayankce@gmail.com>",
   "license": "MIT",
   "repository": "patelmayankce/react-apple-login",
   "main": "dist/index.js",
