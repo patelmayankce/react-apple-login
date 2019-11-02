@@ -30,7 +30,7 @@ class Example extends React.Component {
 
 |    params    |   value  |             default value            |   description    |
 |:------------:|:--------:|:------------------------------------:|:----------------:|
-|    clientId  |  string  |               REQUIRED               | You can create a clientID by creating a [new project on Google developers website.](https://developers.google.com/identity/sign-in/web/sign-in) |
+|    clientId  |  string  |               REQUIRED               | You can create a clientID from Apple Developer console |
 |    scope     |  string  |                   name email                  |                  |
 | redirectURI |  string  |                   REQUIRED                  | URL of the Javascript file normally hosted by Google |
 |     state    |  string  |             -            |                  |
