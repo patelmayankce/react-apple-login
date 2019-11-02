@@ -10,12 +10,13 @@ export interface AppleLoginProps {
   dataColor?: string | 'white' | 'black';
   dataBorder?: boolean | string | 'true' | 'false';
   dataType?: string | 'sign in' | 'continue';
+  className?: string;
 }
 
 declare const window: any | Window;
 
 const AppleLogin = (props: AppleLoginProps) => {
-  const { clientId, redirectURI, scope = 'name email', state = '', dataBorder = true, dataColor = 'white', dataType = 'sign in' } = props;
+  const { className = '', clientId, redirectURI, scope = 'name email', state = '', dataBorder = true, dataColor = 'white', dataType = 'sign in' } = props;
   const [loaded] = useScript(
     'https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js',
   );
@@ -40,7 +41,7 @@ const AppleLogin = (props: AppleLoginProps) => {
 
   return (
     <>
-      <div id="appleid-signin" data-color={dataColor} data-border={dataBorder.toString()} data-type={dataType} />
+      <div className={className} id="appleid-signin" data-color={dataColor} data-border={dataBorder.toString()} data-type={dataType} />
     </>
   );
 };

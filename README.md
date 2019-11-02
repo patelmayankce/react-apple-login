@@ -32,11 +32,12 @@ class Example extends React.Component {
 |:------------:|:--------:|:------------------------------------:|:----------------:|
 |    clientId  |  string  |               REQUIRED               | You can create a clientID from Apple Developer console |
 |    scope     |  string  |                   name email                  |                  |
-| redirectURI |  string  |                   REQUIRED                  | URL of the Javascript file normally hosted by Google |
+| redirectURI |  string  |                   REQUIRED                  |  |
 |     state    |  string  |             -            |                  |
 |     dataColor    |  string  |             black            |                  |
 |     dataBorder    |  boolean/string  |             false            |                  |
 |     dataType    |  string(sign in/continue)  |             sign in            |                  |
+|     className    |  string  |             -            |                  |
 
 ## Production Bundle
 ```
