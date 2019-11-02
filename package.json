@@ -1,6 +1,6 @@
 {
   "name": "react-apple-login",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Apple Log-in Component for React",
   "author": "Mayank Patel <patelmayankce@gmail.com>",
   "license": "MIT",
@@ -8,6 +8,16 @@
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
+  "keywords": [
+    "react",
+    "reactjs",
+    "apple",
+    "apple-single-sign-on",
+    "apple-login",
+    "apple-login-button",
+    "react-apple-login",
+    "react-apple-login-button"
+  ],
   "engines": {
     "node": ">=8",
     "npm": ">=5"
