@@ -1,0 +1,8 @@
+{
+  "short_name": "react-apple-login",
+  "name": "react-apple-login",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
