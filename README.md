@@ -4,11 +4,13 @@
 
 [![NPM](https://img.shields.io/npm/v/react-apple-login.svg)](https://www.npmjs.com/package/react-apple-login) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+
 ## Install
 
 ```bash
 npm install --save react-apple-login
 ```
+
 
 ## Usage
 
@@ -20,11 +22,12 @@ import AppleLogin from 'react-apple-login'
 class Example extends React.Component {
   render () {
     return (
-      <AppleLogin clientId="com.react.apple.login" scope="name email" redirectURI="https://redirectUrl.com" state="" />
+      <AppleLogin clientId="com.react.apple.login" redirectURI="https://redirectUrl.com" />
     )
   }
 }
 ```
+
 
 ## Login Props
 
@@ -37,14 +40,15 @@ class Example extends React.Component {
 | responseMode |  string  |                   query                  | The type of response mode expected. Valid values are query, fragment, and form_post. If you requested any scopes, the value must be form_post. |
 |     state    |  string  |             -            |         The current state of the request.         |
 |     nonce    |  string  |             -            |         A String value used to associate a client session with an ID token. This value is also used to mitigate replay attacks.         |
-|     designProp.height    |  number  |             30            |        The height of the button image. The minimum and maximum values are 30 and 64, respectively, and the default value is 30.         |
-|     designProp.width    |  number  |             140            |        The width of the button image. The minimum and maximum values are 130 and 375, respectively, and the default value is 140.         |
+|     designProp.height    |  number  |             30            |        The height of the button image. The minimum and maximum values are 30 and 64, respectively         |
+|     designProp.width    |  number  |             140            |        The width of the button image. The minimum and maximum values are 130 and 375, respectively.       |
 |     designProp.color    |  string  |             black            |        The background color for the button image. The possible values are white and black (the default).         |
-|     designProp.border    |  boolean  |             false            |        A Boolean value that determines whether the button image has a border. The default value is false.         |
+|     designProp.border    |  boolean  |             false            |        A Boolean value that determines whether the button image has a border.          |
 |     designProp.type    |  string  |             sign-in            |        The type of button image returned. The possible values are sign-in (the default) and continue.        |
-|     designProp.border_radius    |  number  |             15            |        The corner radius for the button image. The minimum and maximum values are 0 and 50, respectively, and the default value is 15.        |
-|     designProp.scale    |  number  |             1            |        The scale of the button image. The minimum and maximum values are 1 and 6, respectively, and the default value is 1.       |
-|     designProp.locale    |  string  |             en_US            |        The language used for text on the button. The possible values are ar_SA, ca_ES, cs_CZ, da_DK, de_DE, el_GR, en_GB, en_US, es_ES, es_MX, fi_FI, fr_CA, fr_FR, hr_HR, hu_HU, id_ID, it_IT, iw_IL, ja_JP, ko_KR, ms_MY, nl_NL, no_NO, pl_PL, pt_BR, pt_PT, ro_RO, ru_RU, sk_SK, sv_SE, th_TH, tr_TR, uk_UA, vi_VI, zh_CN, zh_HK, and zh_TW.     |
+|     designProp.border_radius    |  number  |             15            |        The corner radius for the button image. The minimum and maximum values are 0 and 50, respectively.        |
+|     designProp.scale    |  number  |             1            |        The scale of the button image. The minimum and maximum values are 1 and 6, respectively.       |
+|     designProp.locale    |  string  |             en_US            |        The language used for text on the button.     |
+
 
 ## Production Bundle
 
