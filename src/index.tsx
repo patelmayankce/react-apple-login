@@ -1,49 +1,97 @@
 import React, { useEffect } from 'react';
 
-import useScript from './useScript';
-
 export interface AppleLoginProps {
   clientId: string;
-  scope?: string;
   redirectURI: string;
+  scope?: string;
   state?: string;
-  dataColor?: string | 'white' | 'black';
-  dataBorder?: boolean | string | 'true' | 'false';
-  dataType?: string | 'sign in' | 'continue';
-  className?: string;
+  responseType?: string | 'code' | 'id_token';
+  responseMode?: string | 'query' | 'fragment' | 'form_post';
+  nonce?: string;
+  designProp?: {
+    // REF: https://developer.apple.com/documentation/signinwithapplejs/incorporating_sign_in_with_apple_into_other_platforms
+    height?: number;
+    width?: number;
+    color?: string | 'white' | 'black';
+    border?: boolean;
+    type?: string | 'sign-in' | 'continue';
+    border_radius?: number;
+    scale?: number;
+    locale?: string;
+  }
+  callback?: (d: any) => void;
+  render?: (props: { onClick: (e?: any) => void, disabled?: boolean }) => JSX.Element;
 }
 
-declare const window: any | Window;
+const generateQueryString = (q: any) => {
+  let queryString = '';
+  if (q) {
+    const queryKeys = Object.keys(q);
+    queryKeys.forEach(key => {
+      if (q[key]) {
+        if (q[key].toString().length) {
+          queryString += `${key}=${q[key]}&`;
+        }
+      }
+    });
+    if (queryKeys.length > 0 && queryString[queryString.length - 1] === '&') {
+      queryString = queryString.slice(0, -1);
+    }
+  }
+  return queryString;
+};
 
 const AppleLogin = (props: AppleLoginProps) => {
-  const { className = '', clientId, redirectURI, scope = 'name email', state = '', dataBorder = true, dataColor = 'white', dataType = 'sign in' } = props;
-  const [loaded] = useScript(
-    'https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js',
-  );
+  const { clientId, redirectURI, state = '', render, designProp = {}, responseMode = 'query', responseType = 'code', nonce, callback, scope } = props;
 
   useEffect(() => {
-    if (loaded) {
-      try {
-        if (window && window.AppleID && window.AppleID.auth) {
-          window.AppleID.auth.init({
-            clientId,
-            scope,
-            redirectURI,
-            state,
-          });
-        }
-      } catch (e) {
-        console.log(e);
+    if (typeof callback === 'function' && responseMode === 'query' && responseType === 'code' && window && window.location) {
+      let match;
+      const pl = /\+/g,  // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = (s: any) => { return decodeURIComponent(s.replace(pl, " ")); },
+        query = window.location.search.substring(1);
+
+      let urlParams = {};
+      while (match = search.exec(query)) {
+        urlParams[decode(match[1])] = decode(match[2]);
+      }
+      if (urlParams['code']) {
+        callback({
+          code: urlParams['code']
+        });
       }
     }
-    return () => { };
-  }, [loaded]);
+    return () => {
+    };
+  }, [])
+
+  const onClick = (e: any) => {
+    if (e) {
+      e.preventDefault();
+    }
+    window.location.href = `https://appleid.apple.com/auth/authorize?${generateQueryString({
+      response_type: responseType,
+      response_mode: responseMode,
+      client_id: clientId,
+      redirect_uri: encodeURIComponent(redirectURI),
+      state,
+      nonce,
+      scope: responseMode === 'query' ? '' : scope
+    })}`;
+  }
+
+  if (typeof render === 'function') {
+    return render({ onClick })
+  }
 
   return (
     <>
-      <div className={className} id="appleid-signin" data-color={dataColor} data-border={dataBorder.toString()} data-type={dataType} />
+      <div onClick={onClick}>
+        <img src={`https://appleid.cdn-apple.com/appleid/button?${generateQueryString(designProp)}`} />
+      </div>
     </>
   );
 };
 
-export default AppleLogin
+export default AppleLogin;

@@ -4,7 +4,7 @@ import AppleLogin from 'react-apple-login';
 const App = () => {
   return (
     <div>
-      <AppleLogin clientId="com.react.apple.login" scope="name email" redirectURI="https://redirectUrl.com" state="" />
+      <AppleLogin clientId="com.react.apple.login" redirectURI="https://redirectUrl.com" />
     </div>
   )
 }
