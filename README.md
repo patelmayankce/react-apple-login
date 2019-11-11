@@ -48,6 +48,8 @@ class Example extends React.Component {
 |     designProp.border_radius    |  number  |             15            |        The corner radius for the button image. The minimum and maximum values are 0 and 50, respectively.        |
 |     designProp.scale    |  number  |             1            |        The scale of the button image. The minimum and maximum values are 1 and 6, respectively.       |
 |     designProp.locale    |  string  |             en_US            |        The language used for text on the button.     |
+|     render    |  function  |             -            |        Render prop to use a custom element, use renderProps.onClick   |
+|     callback    |  function  |             -            |      -   |
 
 
 ## Production Bundle
