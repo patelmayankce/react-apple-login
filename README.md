@@ -6,7 +6,6 @@
 
 See [react-apple-login](https://patelmayankce.github.io/react-apple-login/) for live demo.
 
-
 ## Install
 
 ```bash
