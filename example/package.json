@@ -7,7 +7,7 @@
   "dependencies": {
     "prop-types": "^15.6.2",
     "react": "^16.11.0",
-    "react-apple-login": "file:..",
+    "react-apple-login": "^1.0.6",
     "react-dom": "^16.11.0",
     "react-scripts": "^1.1.4"
   },
