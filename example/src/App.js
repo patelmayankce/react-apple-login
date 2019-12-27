@@ -111,11 +111,11 @@ const App = () => {
               <div className="flex50">
                 <div className="form-group">
                   <label>Height</label>
-                  <input type="number" className="form-control" name="height" placeholder="Enter Height" value={settings.designProp.height} onChange={(e) => changeSettings('height', e, true)} />
+                  <input type="number" className="form-control" name="height" placeholder="Enter Height" min="30" max="64" value={settings.designProp.height} onChange={(e) => changeSettings('height', e, true)} />
                 </div>
                 <div className="form-group">
                   <label>Width</label>
-                  <input type="number" className="form-control" name="Width" placeholder="Enter Width" value={settings.designProp.width} onChange={(e) => changeSettings('width', e, true)} />
+                  <input type="number" className="form-control" name="Width" placeholder="Enter Width" min="130" max="375" value={settings.designProp.width} onChange={(e) => changeSettings('width', e, true)} />
                 </div>
                 <div className="form-group">
                   <label>Color</label>
