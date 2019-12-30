@@ -1,11 +1,14 @@
 import './index.css';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppleLogin from 'react-apple-login';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-import { LOCALES } from './Constants.js';
+import { LOCALES } from './Constants';
 
 const App = () => {
+  const [codeString, setCodeString] = useState('');
   const [settings, setSettings] = useState({
     clientId: 'com.react.apple.login',
     redirectURI: 'https://redirectUrl.com',
@@ -26,6 +29,36 @@ const App = () => {
     }
   });
 
+  useEffect(() => {
+    const buildDesignProps = (designProps) => {
+      let string = `{`;
+      Object.keys(designProps).map((prop) => {
+        string +=`
+          ${prop}: ${(typeof designProps[prop] === 'string') ? `${ JSON.stringify(designProps[prop])}` : JSON.stringify(designProps[prop])},`;
+      });
+      string += `}`;
+      return string;
+    }
+    const buildProps = `${Object.keys(settings).reduce((string, prop) => (
+      `${string}
+       ${prop === 'designProp' ? `${prop}={
+        ${buildDesignProps(settings[prop])}
+        }` : `${prop}={${JSON.stringify(settings[prop])}}`}`
+    ), `
+      <AppleLogin `)}
+      />`;
+setCodeString(`
+import AppleLogin from 'react-apple-login';
+export default class LoginWithApple extends Component {
+  render() {
+    return (${buildProps}
+    );
+  }
+}`);
+    return () => {};
+  }, [settings]);
+
+
   const RenderElementByLoop = (start, end) => {
     let options = [];
     for (let i = start; i <= end; i++) {
@@ -39,7 +72,7 @@ const App = () => {
       setSettings({
         ...settings, designProp: {
           ...settings.designProp,
-          [key]: e.target.value
+          [key]: (key === 'height' || key === 'width' || key === 'border_radius' || key === 'scale') ? Number(e.target.value) : e.target.value
         }
       });
     } else {
@@ -55,9 +88,16 @@ const App = () => {
         </div>
       </header>
       <div className="page-content">
-        <div className="d-flex align-items-center justify-content-between">
-          <div className="render-container flex50 d-flex align-items-center justify-content-center">
-            <AppleLogin {...settings} />
+        <div className="d-flex justify-content-between">
+          <div className="render-container flex50">
+            <div className="text-center">
+              <AppleLogin {...settings} />
+            </div>
+            <div className="code-visual">
+              <SyntaxHighlighter language="javascript" style={atomDark}>
+                {codeString}
+              </SyntaxHighlighter>
+            </div>
           </div>
           <div className="config-container flex50">
             <div className="title-container d-flex align-items-center justify-content-between">
