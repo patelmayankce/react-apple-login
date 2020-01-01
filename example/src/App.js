@@ -12,7 +12,7 @@ const App = () => {
   const [settings, setSettings] = useState({
     clientId: 'com.react.apple.login',
     redirectURI: 'https://redirectUrl.com',
-    scope: 'name email',
+    scope: '',
     state: '',
     responseType: 'code',
     responseMode: 'query',
@@ -30,25 +30,25 @@ const App = () => {
   });
 
   useEffect(() => {
+
     const buildDesignProps = (designProps) => {
-      let string = `{`;
+      let string = ` {`;
       Object.keys(designProps).map((prop) => {
         string +=`
-          ${prop}: ${(typeof designProps[prop] === 'string') ? `${ JSON.stringify(designProps[prop])}` : JSON.stringify(designProps[prop])},`;
+           ${prop}: ${(typeof designProps[prop] === 'string') ? `${ JSON.stringify(designProps[prop])}` : JSON.stringify(designProps[prop])},`;
       });
-      string += `}`;
+      string += ` \n         }`;
       return string;
     }
     const buildProps = `${Object.keys(settings).reduce((string, prop) => (
-      `${string}
-       ${prop === 'designProp' ? `${prop}={
-        ${buildDesignProps(settings[prop])}
-        }` : `${prop}={${JSON.stringify(settings[prop])}}`}`
+      `${string} ${(settings[prop] !== '') ? `
+      ${(prop === 'designProp') ? `${prop}={
+       ${buildDesignProps(settings[prop])}
+       }` : `${prop}={${JSON.stringify(settings[prop])}}`}` : ``}`
     ), `
       <AppleLogin `)}
       />`;
-setCodeString(`
-import AppleLogin from 'react-apple-login';
+setCodeString(`import AppleLogin from 'react-apple-login';
 export default class LoginWithApple extends Component {
   render() {
     return (${buildProps}
@@ -68,15 +68,24 @@ export default class LoginWithApple extends Component {
   }
 
   const changeSettings = (key, e, isDesignSetting) => {
+    let value = (key === 'height' || key === 'width' || key === 'border_radius' || key === 'scale') ? Number(e.target.value) : e.target.value
+    if(value === 'true' || value === 'false'){
+      value = JSON.parse(value);
+    }
     if (isDesignSetting) {
       setSettings({
         ...settings, designProp: {
           ...settings.designProp,
-          [key]: (key === 'height' || key === 'width' || key === 'border_radius' || key === 'scale') ? Number(e.target.value) : e.target.value
+          [key]: value
         }
       });
     } else {
-      setSettings({ ...settings, [key]: e.target.value });
+
+      if(key === 'responseMode' && value === 'query'){
+        setSettings({ ...settings, scope: "" , [key]: value });
+      }else{
+        setSettings({ ...settings, [key]: value });
+      }
     }
   }
 
@@ -121,14 +130,6 @@ export default class LoginWithApple extends Component {
                   <input type="text" className="form-control" name="redirectURI" placeholder="Enter Redirect URI" value={settings.redirectURI} onChange={(e) => changeSettings('redirectURI', e)} />
                 </div>
                 <div className="form-group">
-                  <label>Scope</label>
-                  <input type="text" className="form-control" name="scope" placeholder="Enter Scope" value={settings.scope} onChange={(e) => changeSettings('scope', e)} />
-                </div>
-                <div className="form-group">
-                  <label>State</label>
-                  <input type="text" className="form-control" name="state" placeholder="Enter State" value={settings.state} onChange={(e) => changeSettings('state', e)} />
-                </div>
-                <div className="form-group">
                   <label>Response Type</label>
                   <select className="form-control" name="responseType" value={settings.responseType} onChange={(e) => changeSettings('responseType', e)}>
                     <option>code</option>
@@ -142,6 +143,14 @@ export default class LoginWithApple extends Component {
                     <option>fragment</option>
                     <option>form_post</option>
                   </select>
+                </div>
+                <div className="form-group">
+                  <label>Scope</label>
+                  <input type="text" disabled={settings.responseMode === 'query'? true : false} className="form-control" name="scope" placeholder="Enter Scope" value={settings.scope} onChange={(e) => changeSettings('scope', e)} />
+                </div>
+                <div className="form-group">
+                  <label>State</label>
+                  <input type="text" className="form-control" name="state" placeholder="Enter State" value={settings.state} onChange={(e) => changeSettings('state', e)} />
                 </div>
                 <div className="form-group">
                   <label>Nonce</label>

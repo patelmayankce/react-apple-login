@@ -50,7 +50,7 @@ class Example extends React.Component {
 |     designProp.scale    |  number  |             1            |        The scale of the button image. The minimum and maximum values are 1 and 6, respectively.       |
 |     designProp.locale    |  string  |             en_US            |        The language used for text on the button.     |
 |     render    |  function  |             -            |        Render prop to use a custom element, use renderProps.onClick   |
-|     callback    |  function  |             -            |      -   |
+|     callback    |  function  |             -            |      callback only work with Response Mode query.   |
 
 
 ## Production Bundle
