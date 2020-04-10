@@ -15,6 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "link": "sudo npm link ../node_modules/react",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
