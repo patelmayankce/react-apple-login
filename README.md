@@ -4,7 +4,7 @@
 
 [![NPM](https://img.shields.io/npm/v/react-apple-login.svg)](https://www.npmjs.com/package/react-apple-login) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-See [react-apple-login](https://react-apple-login.cloudmonastery.com/) for live demo.
+See [react-apple-login](https://patelmayankce.github.io/react-apple-login/) for live demo.
 
 ## Install
 
