@@ -40,6 +40,7 @@ class Example extends React.Component {
 | responseType |  string  |                   code                  | The type of response requested. Valid values are code and id_token. You can request one or both. When requesting an id_token response type, response_mode must be either fragment or form_post. |
 | responseMode |  string  |                   query                  | The type of response mode expected. Valid values are query, fragment, and form_post. If you requested any scopes, the value must be form_post. |
 |     state    |  string  |             -            |         The current state of the request.         |
+|     autoLoad    |  boolean  |             false            |         -         |
 |     nonce    |  string  |             -            |         A String value used to associate a client session with an ID token. This value is also used to mitigate replay attacks.         |
 |     designProp.height    |  number  |             30            |        The height of the button image. The minimum and maximum values are 30 and 64, respectively         |
 |     designProp.width    |  number  |             140            |        The width of the button image. The minimum and maximum values are 130 and 375, respectively.       |

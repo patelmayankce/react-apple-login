@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { generateQueryString } from './helper';
 
 export interface AppleLoginProps {
   clientId: string;
   redirectURI: string;
+  autoLoad?: boolean;
   scope?: string;
   state?: string;
   responseType?: string | 'code' | 'id_token';
@@ -26,9 +27,28 @@ export interface AppleLoginProps {
 }
 
 const AppleLogin = (props: AppleLoginProps) => {
-  const { clientId, redirectURI, state = '', render, designProp = {}, responseMode = 'query', responseType = 'code', nonce, callback, scope } = props;
+  const { clientId, redirectURI, state = '', render, designProp = {}, responseMode = 'query', responseType = 'code', nonce, callback, scope, autoLoad = false } = props;
+
+  const onClick = (e: any = null) => {
+    if (e) {
+      e.preventDefault();
+    }
+    window.location.href = `https://appleid.apple.com/auth/authorize?${generateQueryString({
+      response_type: responseType,
+      response_mode: responseMode,
+      client_id: clientId,
+      redirect_uri: encodeURIComponent(redirectURI),
+      state,
+      nonce,
+      scope: responseMode === 'query' ? '' : scope
+    })}`;
+  }
 
   useEffect(() => {
+    if(autoLoad){
+      onClick();
+    }
+
     if (typeof callback === 'function' && responseMode === 'query' && responseType === 'code' && window && window.location) {
       let match;
       const pl = /\+/g,  // Regex for replacing addition symbol with a space
@@ -50,20 +70,6 @@ const AppleLogin = (props: AppleLoginProps) => {
     };
   }, [])
 
-  const onClick = (e: any) => {
-    if (e) {
-      e.preventDefault();
-    }
-    window.location.href = `https://appleid.apple.com/auth/authorize?${generateQueryString({
-      response_type: responseType,
-      response_mode: responseMode,
-      client_id: clientId,
-      redirect_uri: encodeURIComponent(redirectURI),
-      state,
-      nonce,
-      scope: responseMode === 'query' ? '' : scope
-    })}`;
-  }
 
   if (typeof render === 'function') {
     return render({ onClick })
