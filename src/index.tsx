@@ -98,15 +98,13 @@ const AppleLogin = (props: AppleLoginProps) => {
   }
 
   return (
-    <>
-      <div id="appleid-signin" onClick={onClick}>
-        <img
-          src={`https://appleid.cdn-apple.com/appleid/button?${generateQueryString(
-            designProp
-          )}`}
-        />
-      </div>
-    </>
+    <div id="appleid-signin" onClick={onClick}>
+      <img
+        src={`https://appleid.cdn-apple.com/appleid/button?${generateQueryString(
+          designProp
+        )}`}
+      />
+    </div>
   );
 };
 
