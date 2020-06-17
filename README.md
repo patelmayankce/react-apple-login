@@ -1,6 +1,6 @@
 # react-apple-login
 
-> A Apple Log-in Component for React
+> An Apple Log-in Component for React
 
 [![NPM](https://img.shields.io/npm/v/react-apple-login.svg)](https://www.npmjs.com/package/react-apple-login) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
