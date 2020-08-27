@@ -53,6 +53,42 @@ class Example extends React.Component {
 |     render    |  function  |             -            |        Render prop to use a custom element, use renderProps.onClick   |
 |     callback    |  function  |             -            |      callback only work with Response Mode query.   |
 
+## Apple response
+
+
+### Upon authorization success, the server returns the following data object:
+
+```
+{
+     "authorization": {
+       "state": "[STATE]",
+       "code": "[CODE]",
+       "id_token": "[ID_TOKEN]"
+     },
+     "user": {
+       "email": "[EMAIL]",
+       "name": {
+         "firstName": "[FIRST_NAME]",
+         "lastName": "[LAST_NAME]"
+       }
+     }
+}
+```
+
+```
+Note
+
+The user object will only be presented the first time the user authorizes the application.
+```
+
+### Upon failure, the server returns the following data object:
+
+```
+{
+    "error": "[ERROR_CODE]"
+}
+```
+
 
 ## Production Bundle
 
