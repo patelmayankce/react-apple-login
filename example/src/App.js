@@ -17,6 +17,7 @@ const App = () => {
     responseType: 'code',
     responseMode: 'query',
     nonce: '',
+    usePopup: false,
     designProp: {
       height: 30,
       width: 140,
@@ -155,6 +156,13 @@ export default class LoginWithApple extends Component {
                 <div className="form-group">
                   <label>Nonce</label>
                   <input type="text" className="form-control" name="nonce" placeholder="Enter Nonce" value={settings.nonce} onChange={(e) => changeSettings('nonce', e)} />
+                </div>
+                <div className="form-group">
+                  <label>Use Popup</label>
+                  <select className="form-control" name="border" value={settings.usePopup} onChange={(e) => changeSettings('usePopup', e)}>
+                    <option>true</option>
+                    <option>false</option>
+                  </select>
                 </div>
               </div>
               <div className="flex50">
