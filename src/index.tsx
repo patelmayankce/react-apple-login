@@ -127,7 +127,7 @@ const AppleLogin = (props: AppleLoginProps) => {
       AppleID.auth.init({
         clientId,
         scope,
-        redirectURI: `${location.protocol}//${location.host}`,
+        redirectURI: redirectURI || `${location.protocol}//${location.host}${location.pathname}`,
         state,
         nonce,
         usePopup
