@@ -13,7 +13,7 @@ export interface AppleLoginProps {
   responseType?: string | "code" | "id_token";
   responseMode?: string | "query" | "fragment" | "form_post";
   nonce?: string;
-  usePopup?: string;
+  usePopup?: boolean;
   designProp?: {
     // REF: https://developer.apple.com/documentation/signinwithapplejs/incorporating_sign_in_with_apple_into_other_platforms
     height?: number;
