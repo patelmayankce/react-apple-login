@@ -35,9 +35,9 @@ class Example extends React.Component {
 |    params    |   value  |             default value            |   description    |
 |:------------:|:--------:|:------------------------------------:|:----------------:|
 |    clientId  |  string  |               REQUIRED               | The developer’s client identifier, as provided by WWDR. |
-|    scope     |  string  |                  -                   |     The amount of user information requested from Apple. Valid values are name and email. You can request one, both, or none.             |
+|    scope     |  string  |                  -                   |     The amount of user information requested from Apple. Valid values are name and email. You can request one, both(separated by space), or none.             |
 | redirectURI |  string  |                   REQUIRED                  | The URI to which the authorization redirects. |
-| responseType |  string  |                   code                  | The type of response requested. Valid values are code and id_token. You can request one or both. When requesting an id_token response type, response_mode must be either fragment or form_post. |
+| responseType |  string  |                   code                  | The type of response requested. Valid values are code and id_token. You can request one or both(separated by space). When requesting an id_token response type, response_mode must be either fragment or form_post. |
 | responseMode |  string  |                   query                  | The type of response mode expected. Valid values are query, fragment, and form_post. If you requested any scopes, the value must be form_post. |
 |     state    |  string  |             -            |         The current state of the request.         |
 |     autoLoad    |  boolean  |             false            |         -         |
