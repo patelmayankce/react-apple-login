@@ -39,7 +39,7 @@ const AppleLogin = (props: AppleLoginProps) => {
     state = "",
     render,
     designProp = {
-      locale: "en_US"
+      locale: "en_US",
     },
     responseMode = "query",
     responseType = "code",
@@ -47,14 +47,13 @@ const AppleLogin = (props: AppleLoginProps) => {
     callback,
     scope,
     autoLoad = false,
-    usePopup = false
+    usePopup = false,
   } = props;
 
   const [loaded] = useScript(
-    `https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/${(props &&
-      props.designProp &&
-      props.designProp.locale) ||
-      "en_US"}/appleid.auth.js`
+    `https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/${
+      (props && props.designProp && props.designProp.locale) || "en_US"
+    }/appleid.auth.js`
   );
 
   const onClick = async (e: any = null) => {
@@ -70,7 +69,7 @@ const AppleLogin = (props: AppleLoginProps) => {
           redirect_uri: encodeURIComponent(redirectURI),
           state,
           nonce,
-          scope: responseMode === "query" ? "" : scope
+          scope: responseMode === "query" ? "" : scope,
         }
       )}`;
     } else {
@@ -114,25 +113,27 @@ const AppleLogin = (props: AppleLoginProps) => {
         }
         if (urlParams["code"]) {
           callback({
-            code: urlParams["code"]
+            code: urlParams["code"],
           });
         }
       }
+    } else if (usePopup && loaded) {
+      AppleID.auth.init({
+        clientId,
+        scope,
+        redirectURI:
+          redirectURI ||
+          `${location.protocol}//${location.host}${location.pathname}`,
+        state,
+        nonce,
+        usePopup,
+      });
     }
     return () => {};
   }, []);
 
   useEffect(() => {
     if (usePopup && loaded) {
-      AppleID.auth.init({
-        clientId,
-        scope,
-        redirectURI: redirectURI || `${location.protocol}//${location.host}${location.pathname}`,
-        state,
-        nonce,
-        usePopup
-      });
-
       // Call on auto load.
       if (autoLoad) {
         onClick();
