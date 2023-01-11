@@ -123,21 +123,28 @@ const AppleLogin = (props: AppleLoginProps) => {
   }, []);
 
   useEffect(() => {
-    if (usePopup && loaded) {
-      AppleID.auth.init({
-        clientId,
-        scope,
-        redirectURI: redirectURI || `${location.protocol}//${location.host}${location.pathname}`,
-        state,
-        nonce,
-        usePopup
-      });
-
-      // Call on auto load.
-      if (autoLoad) {
-        onClick();
+    const interval = setInterval(() => {
+      if(!window['AppleID']) {
+        return;
       }
-    }
+      if (usePopup && loaded) {
+        AppleID.auth.init({
+          clientId,
+          scope,
+          redirectURI: redirectURI || `${location.protocol}//${location.host}${location.pathname}`,
+          state,
+          nonce,
+          usePopup
+        });
+  
+        // Call on auto load.
+        if (autoLoad) {
+          onClick();
+        }
+      }
+      clearInterval(interval);
+    }, 500);
+    
     return () => {};
   }, [loaded, usePopup]);
 
